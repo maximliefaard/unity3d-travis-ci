@@ -35,6 +35,7 @@ install() {
 	
 	echo "\n\nInstalling `basename "$PACKAGE_URL"`\n\n"
 	ls
+	ls unity_download_cache
 	echo "\n\nCalling installer command with: $PACKAGE_FILENAME \n\n"
 	sudo installer -dumplog -package $UNITY_DOWNLOAD_CACHE/`basename "$PACKAGE_FILENAME"` -target /
 }
