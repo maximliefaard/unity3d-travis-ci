@@ -4,8 +4,7 @@
 # to get download URLs
 UNITY_DOWNLOAD_CACHE="$(pwd)/unity_download_cache"
 UNITY_OSX_PACKAGE_URL="https://download.unity3d.com/download_unity/292b93d75a2c/MacEditorInstaller/Unity.pkg?_ga=2.230872095.1877898192.1557134722-1654540184.1556282109"
-UNITY_WINDOWS_TARGET_PACKAGE_URL="https://beta.unity3d.com/download/46dda1414e51/MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-2017.2.0f3.pkg"
-PACKAGE_FILENAME="Unity_download.pkg"
+UNITY_WINDOWS_TARGET_PACKAGE_URL="https://download.unity3d.com/download_unity/292b93d75a2c/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-2019.1.0f2.pkg?_ga=2.67351697.1877898192.1557134722-1654540184.1556282109"
 
 # Downloads a file if it does not exist
 download() { 
@@ -19,8 +18,6 @@ download() {
 		echo "\n\n$FILE does not exist. Downloading from $URL: \n\n"
 		mkdir -p "$UNITY_DOWNLOAD_CACHE"
 		curl -o $UNITY_DOWNLOAD_CACHE/`basename "$PACKAGE_FILENAME"` "$URL"
-		#curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` gdrive.sh | bash -s $URL
-		#curl gdrive.sh | bash -s $URL
 	else
 		echo "\n\n$FILE Exists. Skipping download.\n\n"
 	fi
@@ -49,5 +46,9 @@ echo "\n\nContents of Unity Download Cache:\n\n"
 ls $UNITY_DOWNLOAD_CACHE
 
 echo "\n\nInstalling Unity...\n\n"
+
+PACKAGE_FILENAME="Unity_download.pkg"
 install $UNITY_OSX_PACKAGE_URL
-#install $UNITY_WINDOWS_TARGET_PACKAGE_URL
+
+PACKAGE_FILENAME="Windows_target_download.pkg"
+install $UNITY_WINDOWS_TARGET_PACKAGE_URL
