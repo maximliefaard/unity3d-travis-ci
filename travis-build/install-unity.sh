@@ -5,7 +5,7 @@
 UNITY_DOWNLOAD_CACHE="$(pwd)/unity_download_cache"
 UNITY_OSX_PACKAGE_URL="https://download.unity3d.com/download_unity/292b93d75a2c/MacEditorInstaller/Unity.pkg?_ga=2.230872095.1877898192.1557134722-1654540184.1556282109"
 UNITY_WINDOWS_TARGET_PACKAGE_URL="https://beta.unity3d.com/download/46dda1414e51/MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-2017.2.0f3.pkg"
-
+PACKAGE_FILENAME="Unity.pkg"
 
 # Downloads a file if it does not exist
 download() {
@@ -29,9 +29,10 @@ download() {
 install() {
 	PACKAGE_URL=$1
 	download $1
-
+	
 	echo "Installing `basename "$PACKAGE_URL"`"
-	sudo installer -dumplog -package $UNITY_DOWNLOAD_CACHE/`basename "$PACKAGE_URL"` -target /
+	ls
+	sudo installer -dumplog -package $UNITY_DOWNLOAD_CACHE/`basename "$PACKAGE_FILENAME"` -target /
 }
 
 
@@ -40,5 +41,5 @@ echo "Contents of Unity Download Cache:"
 ls $UNITY_DOWNLOAD_CACHE
 
 echo "Installing Unity..."
-install "Unity.pkg"
-install $UNITY_WINDOWS_TARGET_PACKAGE_URL
+install $UNITY_OSX_PACKAGE_URL
+#install $UNITY_WINDOWS_TARGET_PACKAGE_URL
