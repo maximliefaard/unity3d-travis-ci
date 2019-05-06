@@ -18,7 +18,7 @@ download() {
 	if [ ! -e $UNITY_DOWNLOAD_CACHE/`basename "$URL"` ] ; then
 		echo "\n\n$FILE does not exist. Downloading from $URL: \n\n"
 		mkdir -p "$UNITY_DOWNLOAD_CACHE"
-		curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` "$PACKAGE_FILENAME"
+		curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` "$URL"
 		#curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` gdrive.sh | bash -s $URL
 		#curl gdrive.sh | bash -s $URL
 	else
@@ -34,9 +34,12 @@ install() {
 	download $1
 	
 	echo "\n\nInstalling `basename "$PACKAGE_URL"`\n\n"
+	echo "\n\nRunning ls"
 	ls
+	echo "\n\nRunning ls unity_download_cache"
 	ls unity_download_cache
 	echo "\n\nCalling installer command with: $PACKAGE_FILENAME \n\n"
+	
 	sudo installer -dumplog -package $UNITY_DOWNLOAD_CACHE/`basename "$PACKAGE_FILENAME"` -target /
 }
 
