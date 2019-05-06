@@ -8,38 +8,42 @@ UNITY_WINDOWS_TARGET_PACKAGE_URL="https://beta.unity3d.com/download/46dda1414e51
 PACKAGE_FILENAME="Unity.pkg"
 
 # Downloads a file if it does not exist
-download() {
+download() { 
+	echo "\n\nEntered download method with: $1\n\n"
 
 	URL=$1
 	FILE=`basename "$URL"`
 	
 	# Downloads a package if it does not already exist in cache
 	if [ ! -e $UNITY_DOWNLOAD_CACHE/`basename "$URL"` ] ; then
-		echo "$FILE does not exist. Downloading from $URL: "
+		echo "\n\n$FILE does not exist. Downloading from $URL: \n\n"
 		mkdir -p "$UNITY_DOWNLOAD_CACHE"
 		curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` "$URL"
 		#curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` gdrive.sh | bash -s $URL
 		#curl gdrive.sh | bash -s $URL
 	else
-		echo "$FILE Exists. Skipping download."
+		echo "\n\n$FILE Exists. Skipping download.\n\n"
 	fi
 }
 
 # Downloads and installs a package from an internet URL
 install() {
+	echo "\n\nEntered install method with: $1\n\n"
+	
 	PACKAGE_URL=$1
 	download $1
 	
-	echo "Installing `basename "$PACKAGE_URL"`"
+	echo "\n\nInstalling `basename "$PACKAGE_URL"`\n\n"
 	ls
+	echo "\n\nCalling installer command with: $PACKAGE_FILENAME \n\n"
 	sudo installer -dumplog -package $UNITY_DOWNLOAD_CACHE/`basename "$PACKAGE_FILENAME"` -target /
 }
 
 
 
-echo "Contents of Unity Download Cache:"
+echo "\n\nContents of Unity Download Cache:\n\n"
 ls $UNITY_DOWNLOAD_CACHE
 
-echo "Installing Unity..."
+echo "\n\nInstalling Unity...\n\n"
 install $UNITY_OSX_PACKAGE_URL
 #install $UNITY_WINDOWS_TARGET_PACKAGE_URL
