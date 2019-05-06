@@ -3,7 +3,7 @@
 # See https://unity3d.com/get-unity/download/archive
 # to get download URLs
 UNITY_DOWNLOAD_CACHE="$(pwd)/unity_download_cache"
-UNITY_OSX_PACKAGE_URL="https://drive.google.com/file/d/1PDOVlb-B2iJ98Scpyfx668xHE1OtHnqj/view?usp=sharing"
+UNITY_OSX_PACKAGE_URL="https://download.unity3d.com/download_unity/292b93d75a2c/MacEditorInstaller/Unity.pkg?_ga=2.230872095.1877898192.1557134722-1654540184.1556282109"
 UNITY_WINDOWS_TARGET_PACKAGE_URL="https://beta.unity3d.com/download/46dda1414e51/MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-2017.2.0f3.pkg"
 
 
@@ -17,9 +17,9 @@ download() {
 	if [ ! -e $UNITY_DOWNLOAD_CACHE/`basename "$URL"` ] ; then
 		echo "$FILE does not exist. Downloading from $URL: "
 		mkdir -p "$UNITY_DOWNLOAD_CACHE"
-		#curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` "$URL"
+		curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` "$URL"
 		#curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` gdrive.sh | bash -s $URL
-		curl gdrive.sh | bash -s $URL
+		#curl gdrive.sh | bash -s $URL
 	else
 		echo "$FILE Exists. Skipping download."
 	fi
