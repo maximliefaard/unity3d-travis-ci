@@ -18,7 +18,8 @@ download() {
 		echo "$FILE does not exist. Downloading from $URL: "
 		mkdir -p "$UNITY_DOWNLOAD_CACHE"
 		#curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` "$URL"
-		curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` gdrive.sh | bash -s $URL
+		#curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` gdrive.sh | bash -s $URL
+		curl gdrive.sh | bash -s $URL
 	else
 		echo "$FILE Exists. Skipping download."
 	fi
