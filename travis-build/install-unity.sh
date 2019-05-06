@@ -5,7 +5,7 @@
 UNITY_DOWNLOAD_CACHE="$(pwd)/unity_download_cache"
 UNITY_OSX_PACKAGE_URL="https://download.unity3d.com/download_unity/292b93d75a2c/MacEditorInstaller/Unity.pkg?_ga=2.230872095.1877898192.1557134722-1654540184.1556282109"
 UNITY_WINDOWS_TARGET_PACKAGE_URL="https://beta.unity3d.com/download/46dda1414e51/MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-2017.2.0f3.pkg"
-PACKAGE_FILENAME="Unity.pkg"
+PACKAGE_FILENAME="Unity_download.pkg"
 
 # Downloads a file if it does not exist
 download() { 
@@ -18,7 +18,7 @@ download() {
 	if [ ! -e $UNITY_DOWNLOAD_CACHE/`basename "$URL"` ] ; then
 		echo "\n\n$FILE does not exist. Downloading from $URL: \n\n"
 		mkdir -p "$UNITY_DOWNLOAD_CACHE"
-		curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` "$URL"
+		curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` "$PACKAGE_FILENAME"
 		#curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` gdrive.sh | bash -s $URL
 		#curl gdrive.sh | bash -s $URL
 	else
